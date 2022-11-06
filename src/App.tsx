@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import '../src/App.css';
 import { Todo } from './components/Todo';
 
@@ -18,7 +18,7 @@ export default function App(){
 
   console.log(todoInput);
 
-  function changeInput(event :any){
+  function changeInput(event: ChangeEvent<HTMLInputElement>){
     setTodoInput(event.target.value)
   }
 
