@@ -1,5 +1,5 @@
 
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import '../src/App.css';
 import { Todo } from './components/Todo';
 
@@ -12,9 +12,20 @@ export type TodosProps = {
 
 export default function App(){
 
-  const [todos, setTodos]=useState<TodosProps[]>([])
-
+  
   const [todoInput, setTodoInput]=useState('')
+  const [todos, setTodos]=useState<TodosProps[]>(()=>{
+    const storedTodos = localStorage.getItem('@lista-tarefas:todos' )
+    if(storedTodos){
+      return JSON.parse(storedTodos)
+    }
+   [] 
+  })
+  useEffect(() =>{
+    
+    localStorage.setItem('@lista-tarefas:todos', JSON.stringify(todos))
+  },[todos])
+  
 
   console.log(todoInput);
 
